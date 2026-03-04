@@ -108,14 +108,22 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   const services = [
-    { name: "OpenClaw Gateway", unit: "openclaw-gateway" },
-    { name: "SSM Agent", unit: "amazon-ssm-agent" },
-    { name: "PostgreSQL", unit: "postgresql" },
-    { name: "Redis", unit: "redis-server" },
+    {
+      name: "OpenClaw Gateway",
+      unit: "openclaw-gateway",
+      check: "XDG_RUNTIME_DIR=/run/user/1000 systemctl --user is-active openclaw-gateway",
+    },
+    {
+      name: "SSM Agent",
+      unit: "snap.amazon-ssm-agent.amazon-ssm-agent.service",
+      check: "systemctl is-active snap.amazon-ssm-agent.amazon-ssm-agent.service",
+    },
+    { name: "PostgreSQL", unit: "postgresql", check: "systemctl is-active postgresql" },
+    { name: "Redis", unit: "redis-server", check: "systemctl is-active redis-server" },
   ];
 
   const serviceChecks = Promise.all(
-    services.map((s) => run(`systemctl is-active ${s.unit}`))
+    services.map((s) => run(s.check))
   );
 
   const [
@@ -131,7 +139,8 @@ export async function GET() {
     ufwOutput,
     f2bOutput,
     f2bSshdOutput,
-    journalOutput,
+    journalUserOutput,
+    journalSystemOutput,
     nprocOutput,
   ] = await Promise.all([
     serviceChecks,
@@ -147,7 +156,10 @@ export async function GET() {
     run("sudo fail2ban-client status 2>/dev/null"),
     run("sudo fail2ban-client status sshd 2>/dev/null"),
     run(
-      "journalctl --no-pager -n 50 --output=json -u openclaw-gateway -u amazon-ssm-agent -u postgresql -u redis-server --since '3 days ago' 2>/dev/null"
+      "XDG_RUNTIME_DIR=/run/user/1000 journalctl --user-unit openclaw-gateway --no-pager -n 25 --output=json --since '3 days ago' 2>/dev/null"
+    ),
+    run(
+      "journalctl --no-pager -n 25 --output=json -u snap.amazon-ssm-agent.amazon-ssm-agent.service -u postgresql -u redis-server --since '3 days ago' 2>/dev/null"
     ),
     run("nproc"),
   ]);
@@ -197,7 +209,10 @@ export async function GET() {
       totalFailed: parseInt(f2bTotalFailedMatch?.[1] ?? "0"),
       totalBanned: parseInt(f2bTotalBannedMatch?.[1] ?? "0"),
     },
-    incidents: parseJournal(journalOutput),
+    incidents: [
+      ...parseJournal(journalUserOutput),
+      ...parseJournal(journalSystemOutput),
+    ].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()),
   };
 
   return NextResponse.json(data);
