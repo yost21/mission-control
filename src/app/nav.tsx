@@ -7,6 +7,7 @@ const links = [
   { href: "/pulse", label: "Pulse" },
   { href: "/brief", label: "Brief" },
   { href: "/feed", label: "Feed" },
+  { href: "/meme", label: "Meme" },
 ];
 
 export default function Nav() {
