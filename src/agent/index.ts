@@ -13,4 +13,7 @@
  *   OBSIDIAN_INBOX_DIR       — Subfolder in vault for dumps (default: "Brain Dump")
  */
 
+import { config } from "dotenv";
+config({ path: [".env.local", ".env"] });
+
 import "./discord-bot";
