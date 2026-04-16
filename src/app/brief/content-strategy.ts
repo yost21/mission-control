@@ -1,137 +1,140 @@
-// Content Strategy Analysis — Week of April 6–12, 2026
+// Go-To-Market Strategy — Week of April 6–12, 2026
 // Positioning: Claude Consultant / Claude Implementation Expert
+// Mode: REVENUE-FIRST. Content is an ad for the offer, not the goal.
 
-export interface ContentPiece {
+export interface Action {
   rank: number;
   title: string;
-  format: string;
-  platform: string;
-  hook: string;
-  whyNow: string;
-  consultantAngle: string;
-  estimatedLeverage: "critical" | "high" | "medium";
-  effort: "low" | "medium" | "high";
-  keywords: string[];
+  type: "offer" | "outreach" | "content" | "asset";
+  owner: "you";
+  hoursEstimate: number;
+  directRevenueImpact: "immediate" | "30-day" | "long-tail";
+  description: string;
+  deliverables: string[];
+  successMetric: string;
 }
 
-export const weeklyStrategy: ContentPiece[] = [
+export const weeklyPlan: Action[] = [
   {
     rank: 1,
-    title: "Claude Certified Architect — What You Need to Know Before You Sit the Exam",
-    format: "Long-form guide + Twitter/LinkedIn thread",
-    platform: "Blog + LinkedIn + X",
-    hook:
-      "Anthropic just launched their first technical certification. Here's what I found studying for it — and why it matters for your career.",
-    whyNow:
-      "The Claude Certified Architect (Foundations) cert launched March 12 via the new Partner Network ($100M investment). Almost no practitioner content exists yet. First-mover advantage on exam prep content will capture long-tail search traffic for months.",
-    consultantAngle:
-      "Positions you as someone who isn't just using Claude — you're certified by Anthropic. The cert is the credibility signal that turns 'I know Claude' into 'Anthropic validated that I know Claude.' Walk readers through the exam domains (Agent SDK, MCP, prompt engineering, safety) and what real-world consulting engagements each maps to.",
-    estimatedLeverage: "critical",
-    effort: "medium",
-    keywords: [
-      "Claude Certified Architect",
-      "Anthropic certification",
-      "Claude consultant",
-      "Claude Partner Network",
-      "AI certification 2026",
+    title: "Productize and launch: Claude Code Auto Mode Readiness Audit",
+    type: "offer",
+    owner: "you",
+    hoursEstimate: 4,
+    directRevenueImpact: "immediate",
+    description:
+      "Flat-fee diagnostic engagement. 1-week turnaround. Tied to an urgent problem every eng manager is asking about right now: 'are we ready to let Claude Code run unsupervised?' This is the wedge into bigger implementation retainers.",
+    deliverables: [
+      "One-page offer doc (problem, deliverable, price, timeline)",
+      "Price: $2,500 flat (or $3,500 with a 30-day follow-up slot)",
+      "Deliverable: written readiness assessment + .claude/CLAUDE.md template + permission boundary config + 60-min walkthrough call",
+      "Stripe/Paddle payment link or simple invoice flow",
+      "Simple landing page (Carrd, Framer, or a single Next.js route here)",
     ],
+    successMetric: "Offer is live and shareable by Wednesday EOD",
   },
   {
     rank: 2,
-    title: "I Let Claude Code Auto Mode Run My Entire PR Workflow for a Week",
-    format: "Walkthrough / case study with screenshots",
-    platform: "Blog + YouTube/Loom + X",
-    hook:
-      "Auto Mode shipped 2 weeks ago and most people haven't tried it. I handed it my real codebase. Here's what happened.",
-    whyNow:
-      "Claude Code Auto Mode launched March 24 — autonomous file writes, terminal commands, and multi-step workflows without approval. Very little practitioner content exists. Demonstrating real workflows with real repos is the content gap.",
-    consultantAngle:
-      "Show the exact workflow: repo setup, .claude/CLAUDE.md configuration, permission boundaries, what it handled well vs. where you intervened. End with a 'readiness checklist' companies can use to evaluate if their team is ready for Auto Mode. This is the kind of content that makes engineering managers say 'we need to hire someone to set this up for us.'",
-    estimatedLeverage: "critical",
-    effort: "medium",
-    keywords: [
-      "Claude Code Auto Mode",
-      "Claude Code tutorial",
-      "agentic coding",
-      "AI developer workflow",
-      "Claude Code setup guide",
+    title: "Build the warm list and run direct outreach",
+    type: "outreach",
+    owner: "you",
+    hoursEstimate: 6,
+    directRevenueImpact: "immediate",
+    description:
+      "Content without distribution is journaling. Before writing anything public, identify 20 warm contacts at companies already using Claude Code. DM them the offer directly. This is where the money comes from this month.",
+    deliverables: [
+      "List of 20 warm contacts (eng managers, CTOs, heads of platform/devex)",
+      "Personalized DM template (3 sentences: specific observation about their stack, the offer, a concrete ask for a 20-min call)",
+      "Send 5/day Mon–Fri",
+      "Track in a simple sheet: name, company, sent date, reply, outcome",
     ],
+    successMetric: "20 DMs sent, 3+ discovery calls booked by Friday",
   },
   {
     rank: 3,
-    title: "Building Production MCP Servers: The Missing Guide",
-    format: "Technical tutorial with code samples",
-    platform: "Blog + GitHub repo + Dev.to",
-    hook:
-      "MCP is the protocol that connects Claude to your tools. Most tutorials stop at 'hello world.' Here's how to build servers your team will actually use in production.",
-    whyNow:
-      "MCP adoption is accelerating (CRM, ERP, database integrations) but most content is surface-level. Enterprises are blocked on implementation. Deep technical guides with real integration patterns (auth, error handling, rate limiting, observability) fill a genuine gap.",
-    consultantAngle:
-      "Walk through building a non-trivial MCP server (e.g., connecting Claude to a CRM or internal database). Cover the patterns enterprises actually need: OAuth flows, connection pooling, structured error responses, and monitoring. This is the content that gets you inbound leads from engineering teams who need help integrating Claude into their stack.",
-    estimatedLeverage: "high",
-    effort: "high",
-    keywords: [
-      "MCP server tutorial",
-      "Model Context Protocol",
-      "Claude MCP integration",
-      "Claude enterprise integration",
-      "Claude tools API",
+    title: "Reactivate dormant network",
+    type: "outreach",
+    owner: "you",
+    hoursEstimate: 2,
+    directRevenueImpact: "immediate",
+    description:
+      "The highest-converting outreach is to people who already know you. Past clients, ex-colleagues, and anyone you've done work for before. They don't need to be sold on you — just informed that you're taking on Claude work.",
+    deliverables: [
+      "List of 15 past clients / former colleagues / people who've referred you before",
+      "Short 'here's what I'm doing now' email — 4 sentences max, no ask, just an FYI with the offer link",
+      "Send all 15 on Monday",
     ],
+    successMetric: "15 emails sent, 2+ intro conversations or referrals",
   },
   {
     rank: 4,
-    title: "Claude Mythos and the Future of Gated AI Releases — What Consultants Need to Tell Their Clients",
-    format: "Thought leadership / hot take",
-    platform: "LinkedIn + X + Newsletter",
-    hook:
-      "Anthropic just restricted their most powerful model to 12 security partners. This changes how enterprises should think about AI procurement.",
-    whyNow:
-      "Claude Mythos was previewed yesterday (April 7) with restricted access under 'Project Glasswing.' Mainstream press is covering it. Hot-take window is 48-72 hours.",
-    consultantAngle:
-      "Frame the narrative: gated releases mean enterprises need advisors who understand both capability and compliance. Connect it to your consulting practice — you help companies navigate not just 'which model' but 'which model am I allowed to use and how do I prepare for the next tier.' This positions you as a strategic advisor, not just a technical implementer.",
-    estimatedLeverage: "high",
-    effort: "low",
-    keywords: [
-      "Claude Mythos",
-      "Anthropic safety",
-      "AI procurement",
-      "responsible AI consulting",
-      "enterprise AI strategy",
+    title: "One content piece — as an ad for the offer",
+    type: "content",
+    owner: "you",
+    hoursEstimate: 3,
+    directRevenueImpact: "30-day",
+    description:
+      "Write the Auto Mode walkthrough, but its job is to sell the audit, not to rank on Google. Ends with a direct CTA: 'I'm running 3 readiness audits this month — DM me.' Post on LinkedIn (where the budget holders are), cross-post to X.",
+    deliverables: [
+      "1 LinkedIn post, 1,200–1,800 characters, with 2–3 screenshots",
+      "Structure: hook → what I tried → what broke → what you need to check before turning Auto Mode on → CTA with offer link",
+      "Cross-post as X thread",
     ],
+    successMetric: "Post live by Thursday, 1+ inbound DM from it",
   },
   {
     rank: 5,
-    title: "Cowork for Non-Engineers: How I'm Using Claude's Desktop Agent for Sales Ops",
-    format: "Use-case walkthrough with screen recordings",
-    platform: "LinkedIn + YouTube",
-    hook:
-      "Everyone talks about Claude Code for developers. But Cowork is quietly becoming the most powerful tool for non-technical teams. Here's how I set it up for a client's sales org.",
-    whyNow:
-      "Cowork reached full Windows parity in February 2026 and now supports scheduled tasks, folder access, and mobile handoff. Coverage is almost entirely developer-focused. Non-technical use cases (sales, legal, ops) are a wide-open lane.",
-    consultantAngle:
-      "Show a concrete business workflow: Cowork processing a pipeline review, generating follow-up emails, updating a CRM via MCP. This content attracts the budget holders (VPs of Sales, COOs) who hire consultants, not just the engineers.",
-    estimatedLeverage: "medium",
-    effort: "medium",
-    keywords: [
-      "Claude Cowork",
-      "Claude for business",
-      "AI for sales teams",
-      "Claude desktop app",
-      "non-technical AI adoption",
+    title: "Mythos hot take — free positioning, 30 minutes of effort",
+    type: "content",
+    owner: "you",
+    hoursEstimate: 0.5,
+    directRevenueImpact: "long-tail",
+    description:
+      "Only because the effort is near-zero and the news window closes in 48 hours. Short LinkedIn post, strategic framing, no blog post. Reinforces the 'strategic advisor, not just implementer' positioning that justifies the audit price tag.",
+    deliverables: [
+      "1 LinkedIn post, 600–900 characters",
+      "Angle: gated releases = enterprises need advisors who understand capability AND compliance",
     ],
+    successMetric: "Posted Tuesday, done in 30 minutes",
+  },
+];
+
+export const deprioritized = [
+  {
+    item: "Claude Certified Architect long-form guide",
+    reason:
+      "Authority asset with 3–6 month compound return. Worth doing later when revenue is stable. Do NOT spend this week on it — the ROI timeline doesn't match the cash need.",
+    revisitWeek: "Week of May 4 or after $15K in closed audit revenue, whichever comes first",
+  },
+  {
+    item: "MCP production server deep-dive tutorial",
+    reason:
+      "High effort, long payoff. A great Q3 asset but this week it's a distraction from revenue.",
+    revisitWeek: "Month 2",
+  },
+  {
+    item: "Cowork for non-engineers walkthrough",
+    reason:
+      "Good lane, but the audience (non-technical budget holders) is further from ready-to-buy than the eng managers already using Auto Mode.",
+    revisitWeek: "After 3 audits delivered — it becomes a case-study-ready piece then",
   },
 ];
 
 export const strategyMeta = {
   generatedAt: "2026-04-08",
   weekOf: "April 6–12, 2026",
+  mode: "revenue-first",
   positioning: "Claude Consultant / Claude Implementation Expert",
-  topRecommendation:
-    "Start with #4 (Mythos hot take) TODAY — it's low effort and the news window closes fast. Then spend the rest of the week on #1 (Certification guide) as your anchor piece. #2 (Auto Mode) is your follow-up for next week.",
-  publishingCadence: [
-    "Tuesday Apr 8 — Mythos hot take (LinkedIn + X)",
-    "Thursday Apr 10 — Certification guide draft 1 (Blog)",
-    "Friday Apr 11 — Certification thread (X + LinkedIn)",
-    "Next Monday Apr 13 — Auto Mode walkthrough (Blog + video)",
+  thesis:
+    "Content alone does not generate short-term consulting revenue. A productized offer + warm-network outreach + one piece of content that sells the offer does. This week is 80% GTM, 20% content.",
+  weeklyCadence: [
+    "Mon Apr 8 — Draft offer doc + landing page (2h). Send 15 dormant-network emails (1h). Send 5 DMs (1h).",
+    "Tue Apr 9 — Ship Mythos hot take (30min). Send 5 DMs (1h). Finish landing page (2h).",
+    "Wed Apr 10 — Offer live. Send 5 DMs (1h). Draft Auto Mode post (2h).",
+    "Thu Apr 11 — Ship Auto Mode post (1h). Send 5 DMs (1h). Take any discovery calls that land.",
+    "Fri Apr 12 — Follow up with all DMs/emails (1h). Review pipeline. Book next week's calls.",
   ],
+  nonNegotiable:
+    "No new content production until at least 15 outreach touches are out the door. Content without distribution is the trap.",
+  weeklyTargetRevenue: "$5,000 (2 audits at $2,500) or 3+ qualified discovery calls",
 };
