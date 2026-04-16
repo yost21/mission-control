@@ -17,9 +17,15 @@ Some states also offer free or low-cost legal aid for estate planning.
 
 ## Documents Included
 
-1. **last-will-and-testament.md** - Template for a basic will
+**👉 Start here (plain English, tailored to Mom's situation):**
+- **FOR-MOM-plain-english.md** - Answers to "wait, what do I actually do?" questions
+- **moms-simple-will-DRAFT.md** - Pre-filled will for 50/50 split between two kids
+- **moms-DNR-advance-directive-DRAFT.md** - Pre-filled DNR + medical decisions doc
+
+**Generic reference templates** (broader scope, more options):
+1. **last-will-and-testament.md** - Generic will template
 2. **power-of-attorney.md** - Durable Power of Attorney template
-3. **advance-directive.md** - Living will & healthcare proxy (the DNR / "who's in charge" medical decisions document)
+3. **advance-directive.md** - Generic living will & healthcare proxy
 
 ## Next Steps
 
